@@ -7,7 +7,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: '@umijs/max',
+    title: 'lxy-blog-admin',
   },
   routes: [
     {
@@ -29,7 +29,11 @@ export default defineConfig({
       path: '/table',
       component: './Table',
     },
+    {
+      name: '文章管理',
+      path: '/article',
+      component: './Article',
+    },
   ],
   npmClient: 'npm',
 });
-
