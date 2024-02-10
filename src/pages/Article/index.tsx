@@ -1,9 +1,10 @@
 import Markdown from '@/components/markdown';
 // import Editor from '@/components/editor/index,';
 import DirectoryTree from '@/components/DirectoryTree';
-const { Sider } = Layout;
 
 import { Layout } from 'antd';
+const { Sider } = Layout;
+
 import { useEffect, useState } from 'react';
 import { getArticleById } from '@/services/api/article';
 import { Article } from '@/types/article';
