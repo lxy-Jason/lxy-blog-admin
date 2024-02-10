@@ -68,7 +68,7 @@ const Markdown: React.FC<MyComponentProps> = ({content}) => {
       // cdn: '',
       toolbar,
       mode: 'ir',
-      height: window.innerHeight + 100,
+      height: window.innerHeight - 64,
       outline: {
         enable: false,
         position: 'left',

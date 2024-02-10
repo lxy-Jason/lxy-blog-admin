@@ -36,6 +36,7 @@ const DiretoryTree: React.FC<MyComponentProps>= ({getArticleId}) => {
   }, []);
   return (
     <DirectoryTree
+      style={{ height: window.innerHeight - 64 }}
       className={style.directoryTree}
       multiple
       defaultExpandAll

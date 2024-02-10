@@ -1,7 +1,7 @@
 import Markdown from '@/components/markdown';
 // import Editor from '@/components/editor/index,';
 import DirectoryTree from '@/components/DirectoryTree';
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider } = Layout;
 
 import { Layout } from 'antd';
 import { useEffect, useState } from 'react';
@@ -26,7 +26,7 @@ const ArticlePage: React.FC = () => {
   return (
     <>
       <Layout >
-        <Sider>
+        <Sider width="300px">
           <DirectoryTree getArticleId={getArticleId}></DirectoryTree>
         </Sider>
           <Markdown content={articleData?.content || ''}></Markdown>
