@@ -14,3 +14,22 @@ export const layout = () => {
     },
   };
 };
+import { RequestConfig } from '@umijs/max';
+
+// 运行时配置
+export const request: RequestConfig = {
+  // 统一的请求设定
+  timeout: 1000,
+  headers: {'X-Requested-With': 'XMLHttpRequest'},
+
+
+  // 请求拦截器
+  requestInterceptors: [
+
+  ],
+
+  // 响应拦截器
+  responseInterceptors: [
+
+  ]
+};

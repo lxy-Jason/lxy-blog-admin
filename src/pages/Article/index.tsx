@@ -6,7 +6,7 @@ import { Layout } from 'antd';
 const { Sider } = Layout;
 
 import { useEffect, useState } from 'react';
-import { getArticleById } from '@/services/api/article';
+import { getArticleById, updateArticleApi } from '@/services/api/article';
 import { Article } from '@/types/article';
 
 
@@ -18,11 +18,25 @@ const ArticlePage: React.FC = () => {
     console.log(id)
     setId(id)
   }
-  useEffect(() => {
-    getArticleById(id).then(res => {
+  const updateArticle = (content: string) => {
+    if(!id) return
+    const params = {
+      id,
+      content
+    }
+    console.log(params)
+
+    updateArticleApi(params).then(res => {
       console.log(res)
-      setArticleData(res.data)
     })
+  }
+  useEffect(() => {
+    if(id){
+      getArticleById(id).then(res => {
+        console.log(res)
+        setArticleData(res.data)
+      })
+    }
   }, [id]);
   return (
     <>
@@ -30,7 +44,7 @@ const ArticlePage: React.FC = () => {
         <Sider width="300px">
           <DirectoryTree getArticleId={getArticleId}></DirectoryTree>
         </Sider>
-          <Markdown content={articleData?.content || ''}></Markdown>
+          <Markdown content={articleData?.content || ''} updateArticle={updateArticle}></Markdown>
       </Layout>
     </>
   );

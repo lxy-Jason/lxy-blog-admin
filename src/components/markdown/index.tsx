@@ -4,7 +4,6 @@ import "vditor/dist/index.css";
 
 type IntrinsicAttributes = React.JSX.IntrinsicAttributes;
 
-// new VConsole()
 
 let toolbar: (string | IMenuItem) []
 if (window.innerWidth < 768) {
@@ -53,13 +52,12 @@ if (window.innerWidth < 768) {
 }
 interface MyComponentProps extends IntrinsicAttributes {
   content: string;
+  updateArticle: (content:string) => void
   // 其他属性...
 }
 
-const Markdown: React.FC<MyComponentProps> = ({content}) => {
+const Markdown: React.FC<MyComponentProps> = ({content,updateArticle}) => {
   const [vd, setVd] = useState<Vditor>();
-
-  // console.log(data)
   useEffect(() => {
 
     const vditor = new Vditor('vditor', {
@@ -145,6 +143,13 @@ const Markdown: React.FC<MyComponentProps> = ({content}) => {
       after() {
         vditor.setValue(content || '');
         setVd(vditor);
+
+      },
+      blur(value) { //失去焦点保存数据
+        updateArticle(value)
+      },
+      input(value) { // 自带防抖
+        updateArticle(value)
       }
     })
     return () => {
