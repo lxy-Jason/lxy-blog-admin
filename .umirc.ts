@@ -34,6 +34,11 @@ export default defineConfig({
       path: '/article',
       component: './Article',
     },
+    {
+      name: '站点管理',
+      path: '/SystemConfig',
+      component: './SystemConfig',
+    },
   ],
   npmClient: 'npm',
 });
