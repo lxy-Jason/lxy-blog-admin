@@ -20,21 +20,18 @@ export default function (props: {
   const [url, setUrl] = useState('');
   const handleOnChange = debounce((ev) => {
     const val = ev?.target?.value;
-    if (val && val !== url) {
-      setUrl(val);
-    }
+    setUrl(val)
   }, 500);
   useEffect(() => {
-    console.log(props.formRef.getFieldValue(props.name),props.name)
     if (props.formRef && props.formRef.getFieldValue) {
-      const src = props.formRef.getFieldValue(props.name);
+      const src = props.formRef.getFieldValue(props.name) || '';
       setUrl(src);
     }
     if (props.formRef?.current?.getFieldValue) {
-      const src = props.formRef.current.getFieldValue(props.name);
+      const src = props.formRef.current.getFieldValue(props.name) || '';
       setUrl(src);
     }
-  }, [props]);
+  }, [props,setUrl]);
   // const dest = useMemo(() => {
   //   let r = props.isInit ? '/api/admin/init/upload' : '/api/admin/img/upload';
   //   if (props.isFavicon) {
@@ -55,8 +52,8 @@ export default function (props: {
         }}
         extra={
           <div style={{ display: 'flex', marginTop: '10px' }}>
-            <Image src={url || ''} fallback={errorImg} height={100} width={100} />
-            {/*<div style={{ marginLeft: 10 }}>*/}
+            <Image src={url} fallback={url || errorImg} height={100} width={100} />
+            <div style={{ marginLeft: 10 }}>
             {/*  <UploadBtn*/}
             {/*    setLoading={() => {}}*/}
             {/*    muti={false}*/}
@@ -88,7 +85,7 @@ export default function (props: {
             {/*    url={dest}*/}
             {/*    accept=".png,.jpg,.jpeg,.webp,.jiff,.gif"*/}
             {/*  />*/}
-            {/*</div>*/}
+            </div>
           </div>
         }
         rules={props.required ? [{ required: true, message: '这是必填项' }] : undefined}
