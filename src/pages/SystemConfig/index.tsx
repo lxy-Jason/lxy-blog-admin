@@ -1,8 +1,8 @@
 import SiteInfoForm from './components/SiteInfoForm';
-// import { getSiteInfo, updateSiteInfo } from '@/services/van-blog/api';
 import { ProForm } from '@ant-design/pro-components';
 import { Card, message, Modal } from 'antd';
 import { useState } from 'react';
+import { getSiteInfo, updateSiteInfo } from '@/services/api/meta';
 export default function () {
   const [tab, setTab] = useState('basic')
   const [form] = ProForm.useForm();
@@ -25,8 +25,7 @@ export default function () {
         layout={'horizontal'}
         labelCol={{ span: 6 }}
         request={async () => {
-          // const { data } = await getSiteInfo();
-          const { data } = {data:{}};
+          const { data } = await getSiteInfo();
 
           return data;
         }}
@@ -53,7 +52,7 @@ export default function () {
             });
             return;
           }
-          // await updateSiteInfo(data);
+          await updateSiteInfo(data);
           message.success('更新成功！');
         }}
       >
