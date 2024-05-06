@@ -1,6 +1,7 @@
-import Footer from '@/components/Footer';
-import { login } from '@/services/van-blog/api';
-import { encryptPwd } from 'src/utils/encryptPwd';
+// import Footer from '@/components/Footer';
+import logo from '@/assets/images/logo.svg';
+import { login } from '@/services/api/user';
+import { encryptPwd } from '@/utils/encryptPwd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { message } from 'antd';
@@ -8,13 +9,12 @@ import { history, useModel } from 'umi';
 import styles from './index.less';
 
 const Login = () => {
-  const type = 'account';
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const handleSubmit = async (values) => {
     try {
       // 登录
-      const msg = await login({ ...values, type });
+      const msg = await login({ ...values });
 
       if (msg.statusCode === 200) {
         const defaultLoginSuccessMessage = '登录成功！';
@@ -53,9 +53,9 @@ const Login = () => {
       <div className={styles.content}>
         <LoginForm
           className={styles.loginForm}
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="VanBlog"
-          subTitle={'VanBlog 博客管理后台'}
+          logo={logo}
+          title="lxy-blog"
+          subTitle={'lxy-blog 博客管理后台'}
           initialValues={{
             autoLogin: true,
           }}
@@ -67,7 +67,7 @@ const Login = () => {
             });
           }}
         >
-          {type === 'account' && (
+          {
             <>
               <ProFormText
                 name="username"
@@ -100,7 +100,7 @@ const Login = () => {
                 ]}
               />
             </>
-          )}
+          }
           <div
             style={{
               marginBottom: 24,
@@ -121,7 +121,7 @@ const Login = () => {
           </div>
         </LoginForm>
       </div>
-      <Footer />
+      {/*<Footer />*/}
     </div>
   );
 };

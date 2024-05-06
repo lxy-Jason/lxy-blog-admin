@@ -15,19 +15,9 @@ export default defineConfig({
       redirect: '/home',
     },
     {
-      name: '首页',
+      name: '数据概览',
       path: '/home',
       component: './Home',
-    },
-    {
-      name: '权限演示',
-      path: '/access',
-      component: './Access',
-    },
-    {
-      name: ' CRUD 示例',
-      path: '/table',
-      component: './Table',
     },
     {
       name: '文章管理',
@@ -38,6 +28,20 @@ export default defineConfig({
       name: '站点管理',
       path: '/SystemConfig',
       component: './SystemConfig',
+    },
+    {
+      name: '日志管理',
+      path: '/log',
+      component: './Log',
+    },
+    {
+      path: '/user',
+      layout: false,
+      routes: [
+        { name: '登录', path: '/user/login', component: './user/Login' },
+        // { name: '忘记密码', path: '/user/restore', component: './user/Restore' },
+        // { component: './404' },
+      ],
     },
   ],
   npmClient: 'npm',
