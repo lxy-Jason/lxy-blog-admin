@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import Vditor from "vditor";
-import "vditor/dist/index.css";
+import { message } from 'antd';
+import React, { useEffect, useState } from 'react';
+import Vditor from 'vditor';
+import 'vditor/dist/index.css';
 
 type IntrinsicAttributes = React.JSX.IntrinsicAttributes;
 
-
-let toolbar: (string | IMenuItem) []
+let toolbar: (string | IMenuItem)[];
 if (window.innerWidth < 768) {
   toolbar = [
     'emoji',
@@ -41,31 +41,26 @@ if (window.innerWidth < 768) {
     'export',
     {
       name: 'more',
-      toolbar: [
-        'fullscreen',
-        'both',
-        'preview',
-        'info',
-        'help',
-      ],
-    }]
+      toolbar: ['fullscreen', 'both', 'preview', 'info', 'help'],
+    },
+  ];
 }
 interface MyComponentProps extends IntrinsicAttributes {
   content: string;
-  updateArticle: (content:string) => void
+  updateArticle: (content: string) => void;
   // 其他属性...
 }
 
-const Markdown: React.FC<MyComponentProps> = ({content,updateArticle}) => {
+const Markdown: React.FC<MyComponentProps> = ({ content, updateArticle }) => {
   const [vd, setVd] = useState<Vditor>();
   useEffect(() => {
-
     const vditor = new Vditor('vditor', {
       // _lutePath: `http://192.168.31.194:9090/lute.min.js?${new Date().getTime()}`,
       // _lutePath: 'src/js/lute/lute.min.js',
       // cdn: '',
       toolbar,
       mode: 'ir',
+      width: window.innerWidth - 300,
       height: window.innerHeight - 64,
       outline: {
         enable: false,
@@ -90,42 +85,47 @@ const Markdown: React.FC<MyComponentProps> = ({content,updateArticle}) => {
         type: 'text',
       },
       hint: {
-        emojiPath: 'https://cdn.jsdelivr.net/npm/vditor@1.8.3/dist/images/emoji',
-        emojiTail: '<a href="https://ld246.com/settings/function" target="_blank">设置常用表情</a>',
+        emojiPath:
+          'https://cdn.jsdelivr.net/npm/vditor@1.8.3/dist/images/emoji',
+        emojiTail:
+          '<a href="https://ld246.com/settings/function" target="_blank">设置常用表情</a>',
         emoji: {
-          'sd': '💔',
-          'j': 'https://cdn.jsdelivr.net/npm/vditor@1.3.1/dist/images/emoji/j.png',
+          sd: '💔',
+          j: 'https://cdn.jsdelivr.net/npm/vditor@1.3.1/dist/images/emoji/j.png',
         },
         parse: true,
         extend: [
           {
             key: '@',
             hint: (key) => {
-              console.log(key)
+              console.log(key);
               if ('vanessa'.indexOf(key.toLocaleLowerCase()) > -1) {
                 return [
                   {
                     value: '@Vanessa',
                     html: '<img src="https://avatars0.githubusercontent.com/u/970828?s=60&v=4"/> Vanessa',
-                  }]
+                  },
+                ];
               }
-              return []
+              return [];
             },
           },
           {
             key: '#',
             hint: (key) => {
-              console.log(key)
+              console.log(key);
               if ('vditor'.indexOf(key.toLocaleLowerCase()) > -1) {
                 return [
                   {
                     value: '#Vditor',
                     html: '<span style="color: #999;">#Vditor</span> ♏ 一款浏览器端的 Markdown 编辑器，支持所见即所得（富文本）、即时渲染（类似 Typora）和分屏预览模式。',
-                  }]
+                  },
+                ];
               }
-              return []
+              return [];
             },
-          }],
+          },
+        ],
       },
       tab: '\t',
       upload: {
@@ -134,30 +134,35 @@ const Markdown: React.FC<MyComponentProps> = ({content,updateArticle}) => {
         url: '/api/upload/editor',
         linkToImgUrl: '/api/upload/fetch',
         filename(name) {
-          return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5.)]/g, '').replace(/[?\\/:|<>*[\]()$%{}@~]/g, '').replace('/\\s/g', '')
+          return name
+            .replace(/[^(a-zA-Z0-9\u4e00-\u9fa5.)]/g, '')
+            .replace(/[?\\/:|<>*[\]()$%{}@~]/g, '')
+            .replace('/\\s/g', '');
         },
       },
       fullscreen: {
-        index: 100
+        index: 100,
       },
       after() {
         vditor.setValue(content || '');
         setVd(vditor);
-
       },
-      blur(value) { //失去焦点保存数据
-        updateArticle(value)
+      blur(value) {
+        //失去焦点保存数据
+        console.log(value, 'test');
+        updateArticle(value);
+        message.success('内容已保存！');
       },
-      input(value) { // 自带防抖
-        updateArticle(value)
-      }
-    })
+      input(value) {
+        // 自带防抖
+        updateArticle(value);
+      },
+    });
     return () => {
       vd?.destroy();
       setVd(undefined);
     };
   }, [content]);
   return <div id="vditor" className="vditor" />;
-}
-export default Markdown
-
+};
+export default Markdown;

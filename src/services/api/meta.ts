@@ -21,3 +21,8 @@ export const getInit = () => {
 export const updateSiteInfo = (params: SiteInfo) => {
   return request('post', `meta/updateSiteInfo`, params);
 };
+
+// 日志接口
+export const getLogData = (event: string, page: number, pageSize: number) => {
+  return request('get', `log?event=${event}&pageSize=${pageSize}&page=${page}`);
+};

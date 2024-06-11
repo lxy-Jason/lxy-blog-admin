@@ -80,7 +80,8 @@ const Login = () => {
                 rules={[
                   {
                     required: true,
-                    message: '用户名是必填项！',
+                    message: '必填项并且大于等于5个字符！',
+                    min: 5, // 最少要输入 5 个字符
                   },
                 ]}
               />
@@ -95,7 +96,8 @@ const Login = () => {
                 rules={[
                   {
                     required: true,
-                    message: '密码是必填项！',
+                    message: '必填项并且大于等于5个字符！',
+                    min: 5, // 最少要输入 5 个字符
                   },
                 ]}
               />

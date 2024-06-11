@@ -5,8 +5,12 @@
 import { getInit } from '@/services/api/meta';
 import { RequestConfig } from '@umijs/max';
 import { history } from 'umi';
+import './style/code-dark.css';
+import './style/code-light.css';
+import './style/custom-container.css';
+import './style/github-markdown.css';
+import './style/global.less';
 const loginPath = '/user/login';
-
 export async function getInitialState(): Promise<{ name: string }> {
   const fetchInitData = async () => {
     try {

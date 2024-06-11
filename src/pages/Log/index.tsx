@@ -1,10 +1,10 @@
 import { PageContainer } from '@ant-design/pro-components';
-import styles from './index.less';
+import System from './tabs/system';
 
 const HomePage: React.FC = () => {
   return (
     <PageContainer ghost>
-      <div className={styles.container}>日志管理</div>
+      <System />
     </PageContainer>
   );
 };

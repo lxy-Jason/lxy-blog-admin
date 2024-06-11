@@ -134,19 +134,23 @@ export default function (props: {
           />
         </>
       )}
-      {props.showRequire && (
-        <ProFormText
-          name="baseUrl"
-          rules={[{ required: true, message: '这是必填项' }]}
-          label="网站 Url"
-          placeholder={'请输入包含访问协议的完整 URL'}
-          tooltip={'请输入包含访问协议的完整 URL，此 URL 会被用来生成前后台/RSS的相关数据。'}
-          required={true}
-        />
-      )}
+      {/*{props.showRequire && (*/}
+      {/*  <ProFormText*/}
+      {/*    name="baseUrl"*/}
+      {/*    rules={[{ required: true, message: '这是必填项' }]}*/}
+      {/*    label="网站 Url"*/}
+      {/*    placeholder={'请输入包含访问协议的完整 URL'}*/}
+      {/*    tooltip={'请输入包含访问协议的完整 URL，此 URL 会被用来生成前后台/RSS的相关数据。'}*/}
+      {/*    required={true}*/}
+      {/*  />*/}
+      {/*)}*/}
       {props.showOption && (
         <>
-          <ProFormText name="copyrightAggreement" label="版权协议" placeholder={'版权协议'} />
+          <ProFormText
+            name="copyrightAggreement"
+            label="版权协议"
+            placeholder={'版权协议'}
+          />
           <ProFormText
             name="beianNumber"
             label="ICP 备案号"
@@ -172,7 +176,9 @@ export default function (props: {
             isInit={props.isInit}
             name="gaBeianLogoUrl"
             label="公安备案 Logo 地址"
-            placeholder={'请输入公安备案的 logo 的 url，留空不显示公安备案 logo'}
+            placeholder={
+              '请输入公安备案的 logo 的 url，留空不显示公安备案 logo'
+            }
             required={false}
           />
           <ProFormText
@@ -214,7 +220,9 @@ export default function (props: {
               true: '显示',
               false: '隐藏',
             }}
-            tooltip={'默认隐藏，开启后将在主导航栏下方显示分类子导航栏（其实就是双层导航栏）。'}
+            tooltip={
+              '默认隐藏，开启后将在主导航栏下方显示分类子导航栏（其实就是双层导航栏）。'
+            }
           />
 
           <ProFormDigit
@@ -225,7 +233,9 @@ export default function (props: {
             fieldProps={{ precision: 0 }}
             min={0}
             max={200}
-            tooltip={'导航栏显示的是网站名的时候，设置正确偏移以对其分类第一个字。'}
+            tooltip={
+              '导航栏显示的是网站名的时候，设置正确偏移以对其分类第一个字。'
+            }
           />
           <ProFormSelect
             name={'headerLeftContent'}
@@ -235,7 +245,9 @@ export default function (props: {
               siteName: '网站名',
             }}
             placeholder="网站名"
-            tooltip={'显示网站 logo 的前提是已设置正确的网站 logo 哦。默认显示网站名'}
+            tooltip={
+              '显示网站 logo 的前提是已设置正确的网站 logo 哦。默认显示网站名'
+            }
           />
           <ProFormSelect
             name={'showAdminButton'}
@@ -276,7 +288,9 @@ export default function (props: {
               true: '显示',
               false: '隐藏',
             }}
-            tooltip={'默认显示（前提是设置了支付宝和微信支付图片），关闭后所有位置将不显示打赏按钮'}
+            tooltip={
+              '默认显示（前提是设置了支付宝和微信支付图片），关闭后所有位置将不显示打赏按钮'
+            }
           />
           <ProFormSelect
             name={'showDonateInAbout'}
@@ -317,7 +331,9 @@ export default function (props: {
               true: '开启',
               false: '关闭',
             }}
-            tooltip={'默认开启，关闭后即使通过客制化面板，自定义了 CSS、Script、HTML 也不会生效。'}
+            tooltip={
+              '默认开启，关闭后即使通过客制化面板，自定义了 CSS、Script、HTML 也不会生效。'
+            }
           />
           <ProFormSelect
             name={'showRSS'}
