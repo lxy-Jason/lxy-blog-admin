@@ -1,5 +1,6 @@
 import ArticleList from '@/components/ArticleList';
 import TipTitle from '@/components/TipTitle';
+import { ArticleListData, chartData } from '@/types/home';
 import { Area } from '@ant-design/plots';
 import { ProCard, StatisticCard } from '@ant-design/pro-components';
 import { Spin } from 'antd';
@@ -8,19 +9,18 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import getData, { artcileData } from '../constants';
 import style from '../index.less';
 const { Statistic } = StatisticCard;
+
 const OverView = () => {
-  const [data, setData] = useState();
-  const [articleData, setArticleData] = useState();
+  const [data, setData] = useState<chartData | null>(null);
+  const [articleData, setArticleData] = useState<ArticleListData | null>(null);
 
   const [loading, setLoading] = useState(true);
   const [responsive, setResponsive] = useState(false);
   const fetchData = useCallback(async () => {
     const { data: res } = getData;
     console.log(res);
-    // @ts-ignore
     setData(res);
     const { data: res1 } = artcileData;
-    // @ts-ignore
     setArticleData(res1);
   }, [setData]);
   useEffect(() => {
@@ -143,7 +143,8 @@ const OverView = () => {
               chart={
                 <div style={{ marginTop: -14 }}>
                   <ArticleList
-                    showRecentViewTime
+                    showRecentViewTime={true}
+                    showViewerNum={true}
                     articles={articleData?.recentVisitArticles || []}
                   />
                 </div>
@@ -163,7 +164,8 @@ const OverView = () => {
               chart={
                 <div style={{ marginTop: -14 }}>
                   <ArticleList
-                    showViewerNum
+                    showViewerNum={true}
+                    showRecentViewTime={true}
                     articles={articleData?.topViewer || []}
                   />
                 </div>
